@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <!-- Include de la feuille de style de leaflet -->
+        <link rel="stylesheet" href="./leaflet/leaflet.css">
+        <!-- Include de la library JS de Leaflet-->
+        <script src="./leaflet/leaflet.js"></script>        
+
+        <title>Carte</title>
+    </head>
+    <body>
+        <div id="map" style="width: 550px; height: 700px;"></div>
+        <button onclick="addMarker()">Ajouter des marqueurs</button>
+        <button onclick="addTrajet()">Ajouter un trajet</button>
+
+
+	    <script type="text/javascript">
+            var carte = null;
+            // Initialisation de la carte
+            function initMap() {
+                // Ajout du baselayer, vue par defaut en latitude longitude et zoom
+                carte = L.map('map').setView([-21.1332, 55.5441], 10);
+                // Indication à Leaflet du serveur de récupération pour les layers à utiliser. Ici, openstreetmap.fr
+                L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+                    attribution: '<a href="//osm.org/copyright">OpenStreetMap</a>/ODbL</a>',
+                    minZoom: 1,
+                    maxZoom: 20
+                }).addTo(carte);
+            }
+            window.onload = function(){initMap(); };
+
+            function addMarker() {
+                L.marker([-20.877761, 55.457426]).addTo(carte);
+                L.marker([-21.2897667, 55.4066889]).addTo(carte);
+            }
+
+            function addTrajet() {
+                var latlngs = [
+                    [-20.877761, 55.457426],
+                    [-21.009513,55.274624],
+                    [-21.2897667, 55.4066889]
+                ];
+
+                L.polyline(latlngs, {color: 'red'}).addTo(carte);
+            }
+            
+
+        </script>
+    </body>
+</html>
